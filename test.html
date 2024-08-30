@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wave Animation</title>
+</head>
+<style>
+    /* canvas 要素にサイズを指定 */
+    wave-element {
+        display: block;
+        width: 100%;
+        /* もしくは具体的なサイズ */
+        height: 500px;
+        /* もしくは具体的なサイズ */
+    }
+
+    my-greeting {
+        display: block;
+        padding: 20px;
+        background-color: #f4f4f4;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+
+    }
+</style>
+
+<body>
+    <wave-element canvas-id="js-mainVisual__wave1" color="78,193,207,0.8" line-width="3" frequency="2.5" duration="3.14"
+        speed="0.4"></wave-element>
+    <wave-element canvas-id="js-mainVisual__wave2" color="78,193,207,0.6" line-width="5" frequency="2.5" duration="3.14"
+        speed="0.2"></wave-element>
+    <my-greeting></my-greeting>
+    <script src="assets/js/dist/main.bundle.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,223 @@
+.mainVisual {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+.mainVisual .mainVisual__wave {
+  position: absolute;
+  max-width: none;
+  transform-origin: left top;
+  z-index: -900;
+}
+.mainVisual .mainVisual__wave.--front {
+  left: -153.46px;
+  top: 998.62px;
+  height: 178.33px;
+  width: 1698.4px;
+  transform: rotate(-37.6deg);
+}
+.mainVisual .mainVisual__wave.--back {
+  left: -36.52px;
+  top: 870.99px;
+  height: 92.83px;
+  width: 1698.14px;
+  transform: rotate(-34.32deg);
+}
+.mainVisual .mainVisual__wave.--wind {
+  left: -35px;
+  top: 1009px;
+  height: 36px;
+  width: 1698.14px;
+  transform: rotate(-40.94deg);
+}
+.mainVisual .mainVisual__ring {
+  position: absolute;
+}
+.mainVisual .mainVisual__ring.--small {
+  width: 64px;
+  height: 64px;
+  top: 562px;
+  left: 715px;
+}
+.mainVisual .mainVisual__ring.--medium {
+  width: 96px;
+  height: 96px;
+  top: 350px;
+  left: 838px;
+}
+.mainVisual .mainVisual__ring.--large {
+  width: 128px;
+  height: 128px;
+  top: 355px;
+  left: 511px;
+}
+.mainVisual .mainVisual__backGround {
+  position: absolute;
+  transform-origin: left top;
+  width: 1400px;
+  height: 788px;
+  top: 382px;
+  left: -288px;
+  filter: blur(72px);
+  transform: rotate(-19deg);
+  z-index: -910;
+}
+
+.mainVisualTexts {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 40px;
+  top: 640px;
+  left: 40px;
+  z-index: 2;
+}
+.mainVisualTexts .mainVisualTexts__text {
+  color: #524847;
+  font-weight: normal;
+  font-size: 32px;
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+}
+.mainVisualTexts .mainVisualTexts__text.--sub {
+  font-size: 64px;
+  font-weight: 500;
+}
+
+.dammy-header {
+  width: 100%;
+  height: 110px;
+  z-index: 1000;
+  background-color: #524847;
+}
+
+@media screen and (width <= 1140px) {
+  .mainVisual .mainVisual__wave.--front {
+    left: -513px;
+    top: 1803px;
+    height: 113px;
+    width: 1800px;
+    transform: rotate(-49.37deg);
+  }
+  .mainVisual .mainVisual__wave.--back {
+    left: -241px;
+    top: 1313px;
+    height: 48px;
+    width: 2700px;
+    transform: rotate(-49.21deg);
+  }
+  .mainVisual .mainVisual__wave.--wind {
+    left: 10.22px;
+    top: 1059px;
+    height: 36px;
+    width: 1430px;
+    transform: rotate(-45.37deg);
+  }
+  .mainVisual .mainVisual__ring.--small {
+    width: 64px;
+    height: 64px;
+    top: 544px;
+    left: 560px;
+  }
+  .mainVisual .mainVisual__ring.--medium {
+    width: 96px;
+    height: 96px;
+    top: 673px;
+    left: 527px;
+  }
+  .mainVisual .mainVisual__ring.--large {
+    width: 128px;
+    height: 128px;
+    top: 619px;
+    left: 287px;
+  }
+  .mainVisual .mainVisual__backGround {
+    filter: blur(40px);
+    top: 500px;
+    width: 1400px;
+    transform: rotate(-49.94deg);
+  }
+  .mainVisual .mainVisualTexts {
+    gap: 20px;
+    top: 480px;
+    left: 40px;
+  }
+  .mainVisual .mainVisualTexts .mainVisualTexts__text {
+    font-size: 24px;
+    letter-spacing: 0.05em;
+    line-height: 1.6;
+  }
+  .mainVisual .mainVisualTexts .mainVisualTexts__text.--sub {
+    font-size: 40px;
+    font-weight: 500;
+  }
+  .mainVisual .mainVisualTexts .dammy-header {
+    width: 100%;
+    height: 60px;
+  }
+}
+@media screen and (width <= 768px) {
+  .mainVisual .mainVisual__wave.--front {
+    left: -39px;
+    top: 617px;
+    height: 75px;
+    width: 617px;
+    transform: rotate(-49.79deg);
+  }
+  .mainVisual .mainVisual__wave.--back {
+    left: -17.56px;
+    top: 559px;
+    height: 37.5px;
+    width: 570px;
+    transform: rotate(-43.97deg);
+  }
+  .mainVisual .mainVisual__wave.--wind {
+    left: -20px;
+    top: 631px;
+    height: 23px;
+    width: 605px;
+    transform: rotate(-51.05deg);
+  }
+  .mainVisual .mainVisual__ring.--small {
+    width: 48px;
+    height: 48px;
+    top: 174px;
+    left: 305px;
+  }
+  .mainVisual .mainVisual__ring.--medium {
+    width: 80px;
+    height: 80px;
+    top: 320px;
+    left: 253px;
+  }
+  .mainVisual .mainVisual__ring.--large {
+    width: 112px;
+    height: 112px;
+    top: 248px;
+    left: 136px;
+  }
+  .mainVisual .mainVisual__backGround {
+    filter: blur(24px);
+    top: 200px;
+    width: 1400px;
+    transform: rotate(-34.26deg);
+  }
+  .mainVisual .mainVisualTexts {
+    gap: 10px;
+    top: 480px;
+    left: 20px;
+  }
+  .mainVisual .mainVisualTexts .mainVisualTexts__text {
+    font-size: 20px;
+    letter-spacing: 0.05em;
+    line-height: 1.4;
+  }
+  .mainVisual .mainVisualTexts .mainVisualTexts__text.--sub {
+    font-size: 32px;
+  }
+  .mainVisual .dammy-header {
+    width: 100%;
+    height: 60px;
+  }
+}
