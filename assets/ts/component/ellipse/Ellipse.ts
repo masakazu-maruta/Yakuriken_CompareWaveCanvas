@@ -1,12 +1,11 @@
 const SVG_NAMESPACE = "http://www.w3.org/2000/svg";
-
 export class Ellipse {
   public svg: SVGSVGElement;
   public r = 50;
   public color: string;
   public offset = 8;
-  constructor(svgId: string, r: number, g: number, b: number, a: number) {
-    const svgElement = document.getElementById(svgId);
+  constructor(r: number, g: number, b: number, a: number) {
+    const svgElement = document.createElementNS("svg", SVG_NAMESPACE);
     this.color = `rgba(${r},${g},${b},${a})`;
     if (svgElement instanceof SVGSVGElement) {
       this.svg = svgElement;
@@ -65,7 +64,6 @@ export class Ellipse {
         )
       );
     } else {
-      this.svg = document.createElementNS(SVG_NAMESPACE, "svg");
     }
   }
   private createEllipse(
