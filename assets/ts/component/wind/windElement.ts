@@ -19,10 +19,10 @@ export class WindElement extends HTMLElement {
       "y2",
       "amplitude",
       "frequency",
-      "duration",
-      "lineWidth",
-      "mainColor",
-      "fadeColor",
+      "shift",
+      "line-width",
+      "main-color",
+      "fade-color",
     ];
   }
   /* Waveキャンバスとスタイルを適用して子要素にする */
@@ -30,28 +30,28 @@ export class WindElement extends HTMLElement {
   constructor() {
     super();
     this.wind = new Wind();
-    this.attachShadow({ mode: "open" });
-    this.shadowRoot?.appendChild(this.wind.canvas);
     const style = document.createElement("style");
     style.textContent = `
-      :host {
-        position : absolute;
-        display: block;
-        overflow: hidden;
-        transform-origin : center;
+    :host {
+      position : absolute;
+      display: block;
+      overflow: hidden;
+      transform-origin : center;
       }
       canvas {
         display: block;
         height : 100%;
         width : 100%;
-      }
-    `;
+        }
+        `;
+    this.attachShadow({ mode: "open" });
+    this.shadowRoot?.appendChild(this.wind.canvas);
     this.shadowRoot?.appendChild(style);
+    this.updateWindSetting();
   }
 
   connectedCallback() {
     console.log("WaveElement connectedCallback");
-    this.updateWindSettings();
   }
 
   disconnectedCallback() {
@@ -65,11 +65,11 @@ export class WindElement extends HTMLElement {
     newValue: string | null
   ) {
     console.log(`Attribute changed: ${name} from ${oldValue} to ${newValue}`);
-    this.updateWindSettings();
+    this.updateWindSetting();
   }
 
   //属性値から、shadowRootの高さと見た目、波のセッターをいじる
-  private updateWindSettings() {
+  private updateWindSetting() {
     // 属性から設定値を取得
     const startNode: Transform = {
       x: this.getFloatAttribute("x1"),
@@ -79,19 +79,19 @@ export class WindElement extends HTMLElement {
       x: this.getFloatAttribute("x2"),
       y: this.getFloatAttribute("y2"),
     };
-    const mainColor: Color = this.getColorAttribute("mainColor");
-    const fadeColor: Color = this.getColorAttribute("fadeColor");
+    const mainColor: Color = this.getColorAttribute("main-color");
+    const fadeColor: Color = this.getColorAttribute("fade-color");
     const amplitude: number = this.getFloatAttribute("amplitude");
     const frequency: number = this.getFloatAttribute("frequency");
-    const duration: number = this.getFloatAttribute("duration");
-    const lineWidth: number = this.getFloatAttribute("lineWidth");
+    const shift: number = this.getFloatAttribute("shift");
+    const lineWidth: number = this.getFloatAttribute("line-width");
 
     // Wave インスタンスの設定
     this.setHeight(amplitude);
     this.updateAppearanceBTwoPoints(startNode, stopNode);
     this.wind.optimazeContext();
     this.wind.setFrequency(frequency);
-    this.wind.setDuration(duration);
+    this.wind.setShift(shift);
     this.wind.setLineWidth(lineWidth);
     this.wind.setMainColor(mainColor.r, mainColor.g, mainColor.b, mainColor.a);
     this.wind.setFadeColor(fadeColor.r, fadeColor.g, fadeColor.b, fadeColor.a);

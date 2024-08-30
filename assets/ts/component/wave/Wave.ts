@@ -3,7 +3,7 @@ export class Wave {
   private context: CanvasRenderingContext2D;
   private lineWidth: number = 0;
   private frequency: number = 0;
-  private duration: number = 0;
+  private shift: number = 0;
   private speed: number = 0;
   private currentTime: number = 0;
   private createTime: number;
@@ -54,7 +54,7 @@ export class Wave {
     const phase = this.frequency * Math.PI * 2 * (x / this.canvas.width);
     const speedEffect =
       (-this.speed * (this.currentTime - this.createTime)) / 1000;
-    const theta = phase + speedEffect + this.duration;
+    const theta = phase + speedEffect + this.shift;
     return this.getAmplitude() * Math.sin(theta) + this.canvas.clientHeight / 2;
   }
   /* 波の線の真ん中をTransformOriginとするので、高さの半分から線の太さの半分を引く */
@@ -66,8 +66,8 @@ export class Wave {
     this.frequency = frequency;
   }
   /* 波のズレをセット */
-  public setDuration(duration: number) {
-    this.duration = duration;
+  public setShift(shift: number) {
+    this.shift = shift;
   }
   /* 波のスピードをセット */
   public setSpeed(speed: number) {
@@ -82,6 +82,7 @@ export class Wave {
   public setColor(r: number, g: number, b: number, a: number) {
     this.context.strokeStyle = `rgba(${r},${g},${b},${a})`;
   }
+
   /* WARNING : 波の色が黒くなってしまうときはこれが原因かも
   /* 波を最適化　
   /* スケールが変わった直後にやる　
@@ -89,6 +90,7 @@ export class Wave {
   public optimazeContext() {
     this.canvas.height = this.canvas.clientHeight * devicePixelRatio;
     this.canvas.width = this.canvas.clientWidth * devicePixelRatio;
+    /* FIXME : 波が塗りつぶされてしまう原因？ */
     this.context.scale(devicePixelRatio, devicePixelRatio);
   }
 }

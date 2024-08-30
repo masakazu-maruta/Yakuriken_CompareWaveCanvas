@@ -19,8 +19,8 @@ export class WaveElement extends HTMLElement {
       "y2",
       "amplitude",
       "frequency",
-      "duration",
-      "lineWidth",
+      "shift",
+      "line-width",
       "speed",
       "color",
     ];
@@ -30,28 +30,28 @@ export class WaveElement extends HTMLElement {
   constructor() {
     super();
     this.wave = new Wave();
-    this.attachShadow({ mode: "open" });
-    this.shadowRoot?.appendChild(this.wave.canvas);
     const style = document.createElement("style");
     style.textContent = `
-      :host {
-        position : absolute;
-        display: block;
-        overflow: hidden;
-        transform-origin : center;
+    :host {
+      position : absolute;
+      display: block;
+      overflow: hidden;
+      transform-origin : center;
       }
       canvas {
         display: block;
         height : 100%;
         width : 100%;
-      }
-    `;
+        }
+        `;
+    this.attachShadow({ mode: "open" });
+    this.shadowRoot?.appendChild(this.wave.canvas);
     this.shadowRoot?.appendChild(style);
+    this.updateWaveSetting();
   }
 
   connectedCallback() {
     console.log("WaveElement connectedCallback");
-    this.updateWaveSettings();
   }
 
   disconnectedCallback() {
@@ -65,11 +65,11 @@ export class WaveElement extends HTMLElement {
     newValue: string | null
   ) {
     console.log(`Attribute changed: ${name} from ${oldValue} to ${newValue}`);
-    this.updateWaveSettings();
+    this.updateWaveSetting();
   }
 
   //属性値から、shadowRootの高さと見た目、波のセッターをいじる
-  private updateWaveSettings() {
+  private updateWaveSetting() {
     // 属性から設定値を取得
     const startNode: Transform = {
       x: this.getFloatAttribute("x1"),
@@ -82,8 +82,8 @@ export class WaveElement extends HTMLElement {
     const color: Color = this.getColorAttribute("color");
     const amplitude: number = this.getFloatAttribute("amplitude");
     const frequency: number = this.getFloatAttribute("frequency");
-    const duration: number = this.getFloatAttribute("duration");
-    const lineWidth: number = this.getFloatAttribute("lineWidth");
+    const shift: number = this.getFloatAttribute("shift");
+    const lineWidth: number = this.getFloatAttribute("line-width");
     const speed: number = this.getFloatAttribute("speed");
 
     // Wave インスタンスの設定
@@ -91,7 +91,7 @@ export class WaveElement extends HTMLElement {
     this.updateAppearanceBTwoPoints(startNode, stopNode);
     this.wave.optimazeContext();
     this.wave.setFrequency(frequency);
-    this.wave.setDuration(duration);
+    this.wave.setShift(shift);
     this.wave.setSpeed(speed);
     this.wave.setLineWidth(lineWidth);
     this.wave.setColor(color.r, color.g, color.b, color.a);

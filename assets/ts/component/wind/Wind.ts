@@ -5,7 +5,7 @@ export class Wind {
   private fadeColor: string = "";
   private lineWidth: number = 0;
   private frequency: number = 0;
-  private duration: number = 0;
+  private shift: number = 0;
   private currentTime: number = 0;
   private createTime: number;
   private animationId: number | null = null;
@@ -66,7 +66,7 @@ export class Wind {
   /* 波の高さを返す関数 */
   public getYByX(x: number): number {
     const phase = Math.PI * 2 * this.frequency * (x / this.canvas.width);
-    const theta = phase + this.duration;
+    const theta = phase + this.shift;
     return this.getAmplitude() * Math.sin(theta) + this.canvas.clientHeight / 2;
   }
 
@@ -81,8 +81,8 @@ export class Wind {
   }
 
   /* 波のズレをセット */
-  public setDuration(duration: number) {
-    this.duration = duration;
+  public setShift(shift: number) {
+    this.shift = shift;
   }
   /* 波の線の太さをセット */
   public setLineWidth(lineWidth: number) {
@@ -103,6 +103,7 @@ export class Wind {
   public optimazeContext() {
     this.canvas.height = this.canvas.clientHeight * devicePixelRatio;
     this.canvas.width = this.canvas.clientWidth * devicePixelRatio;
+    /* FIXME : 波が塗りつぶされてしまう原因？ */
     this.context.scale(devicePixelRatio, devicePixelRatio);
   }
 }
