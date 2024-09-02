@@ -17,11 +17,19 @@ export class Wind {
     this.startAnimation();
   }
   /* 風を描画 */
+  /* XXX : optimizeContextを最初に呼ぶ理由がわかっていない */
   drawWind() {
-    this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    this.optimizeContext();
+    this.context.lineWidth = this.lineWidth;
+    this.context.clearRect(
+      0,
+      0,
+      this.canvas.clientWidth,
+      this.canvas.clientHeight
+    );
     this.context.beginPath();
     this.context.strokeStyle = this.coloring();
-    for (let i = 0; i < this.canvas.width; i++) {
+    for (let i = 0; i < this.canvas.clientWidth; i++) {
       const y: number = this.getYByX(i);
       this.context.lineTo(i, y);
     }
@@ -65,9 +73,10 @@ export class Wind {
   }
   /* 波の高さを返す関数 */
   public getYByX(x: number): number {
-    const phase = Math.PI * 2 * this.frequency * (x / this.canvas.width);
+    const phase = Math.PI * 2 * this.frequency * (x / this.canvas.clientWidth);
     const theta = phase + this.shift;
-    return this.getAmplitude() * Math.sin(theta) + this.canvas.clientHeight / 2;
+    const centerOffset = this.canvas.clientHeight / 2;
+    return this.getAmplitude() * Math.sin(theta) + centerOffset;
   }
 
   /* 波の線の真ん中をTransformOriginとするので、高さの半分から線の太さの半分を引く */
@@ -86,7 +95,6 @@ export class Wind {
   }
   /* 波の線の太さをセット */
   public setLineWidth(lineWidth: number) {
-    this.context.lineWidth = lineWidth;
     this.lineWidth = lineWidth;
   }
   public setMainColor(r: number, g: number, b: number, a: number) {
@@ -100,10 +108,11 @@ export class Wind {
   /* 波を最適化　
   /* スケールが変わった直後にやる　
   /* 色変更などのあとにやると初期化されてしまうのでやらないでください */
-  public optimazeContext() {
-    this.canvas.height = this.canvas.clientHeight * devicePixelRatio;
-    this.canvas.width = this.canvas.clientWidth * devicePixelRatio;
-    /* FIXME : 波が塗りつぶされてしまう原因？ */
-    this.context.scale(devicePixelRatio, devicePixelRatio);
+  public optimizeContext() {
+    const dpr = devicePixelRatio * 2 || 1;
+    this.canvas.height = this.canvas.clientHeight * dpr;
+    this.canvas.width = this.canvas.clientWidth * dpr;
+    /* XXX : draw関数で毎回呼び出すと直る */
+    this.context.scale(dpr, dpr);
   }
 }

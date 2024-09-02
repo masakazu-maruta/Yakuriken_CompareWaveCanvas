@@ -35,8 +35,6 @@ export class WaveElement extends HTMLElement {
     :host {
       position : absolute;
       display: block;
-      overflow: hidden;
-      transform-origin : center;
       }
       canvas {
         display: block;
@@ -89,7 +87,6 @@ export class WaveElement extends HTMLElement {
     // Wave インスタンスの設定
     this.setHeight(amplitude);
     this.updateAppearanceBTwoPoints(startNode, stopNode);
-    this.wave.optimazeContext();
     this.wave.setFrequency(frequency);
     this.wave.setShift(shift);
     this.wave.setSpeed(speed);

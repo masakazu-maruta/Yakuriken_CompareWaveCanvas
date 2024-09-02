@@ -35,8 +35,6 @@ export class WindElement extends HTMLElement {
     :host {
       position : absolute;
       display: block;
-      overflow: hidden;
-      transform-origin : center;
       }
       canvas {
         display: block;
@@ -89,7 +87,6 @@ export class WindElement extends HTMLElement {
     // Wave インスタンスの設定
     this.setHeight(amplitude);
     this.updateAppearanceBTwoPoints(startNode, stopNode);
-    this.wind.optimazeContext();
     this.wind.setFrequency(frequency);
     this.wind.setShift(shift);
     this.wind.setLineWidth(lineWidth);
